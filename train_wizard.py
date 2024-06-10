@@ -29,7 +29,8 @@ def modificar_JSON_configuracion(n_iter=600000, val_freq=5000, save_freq=1000, p
 
 
 def entrenar_SR3():
-    command = "python " + os.path.join("SR3", "sr.py") + " --config " + os.path.join("config", "train_wizard_deblurring.json") + " -p train"
+    command = "python " + os.path.join("SR3", "sr.py") + " --config " + os.path.join("SR3", os.path.join("config",
+                                                                                                         "train_wizard_deblurring.json")) + " -p train"
     process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
     process.wait()
     print(process.stdout.read().decode("utf-8"))
