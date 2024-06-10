@@ -43,18 +43,27 @@ def main():
         "Ingrese el directorio para guardar imágenes de entrenamiento (predeterminado: './SR3/dataset/train_camus'): ") or './SR3/dataset/train_camus'
     val_dataset = input(
         "Ingrese el directorio para guardar imágenes de validación (predeterminado: './SR3/dataset/validation_camus'): ") or './SR3/dataset/validation_camus'
-    resolution = int(input("Ingrese la resolución de las imágenes (predeterminado: 128): ")) or 128
-    n_iter = int(input(
-        "Ingrese el número de iteraciones durante las que el modelo entrenará (predeterminado: 600000): ")) or 600000
-    val_freq = int(input("Ingrese la frecuencia de validación en iteraciones (predeterminado: 5000): ")) or 5000
-    save_freq = int(input(
-        "Ingrese la frecuencia de guardado de puntos de control en iteraciones (predeterminado: 10000): ")) or 10000
-    print_freq = int(input("Ingrese la frecuencia de impresión de resultados en iteraciones (predeterminado: 10): ")) or 10
+
+    resolution_input = input("Ingrese la resolución de las imágenes (predeterminado: 128): ")
+    resolution = int(resolution_input) if resolution_input else 128
+
+    n_iter_input = input(
+        "Ingrese el número de iteraciones durante las que el modelo entrenará (predeterminado: 600000): ")
+    n_iter = int(n_iter_input) if n_iter_input else 600000
+
+    val_freq_input = input("Ingrese la frecuencia de validación en iteraciones (predeterminado: 5000): ")
+    val_freq = int(val_freq_input) if val_freq_input else 5000
+
+    save_freq_input = input(
+        "Ingrese la frecuencia de guardado de puntos de control en iteraciones (predeterminado: 10000): ")
+    save_freq = int(save_freq_input) if save_freq_input else 10000
+
+    print_freq_input = input("Ingrese la frecuencia de impresión de resultados en iteraciones (predeterminado: 10): ")
+    print_freq = int(print_freq_input) if print_freq_input else 10
 
     modificar_JSON_configuracion(n_iter, val_freq, save_freq, print_freq, resume_state, train_dataset, val_dataset,
                                  resolution)
     entrenar_SR3()
-
 
 if __name__ == "__main__":
     main()

@@ -128,9 +128,14 @@ def main():
         "Ingrese el directorio para guardar imágenes de validación (predeterminado: './SR3/dataset/validation_camus'): ") or './SR3/dataset/validation_camus'
     test_dir = input(
         "Ingrese el directorio para guardar imágenes de prueba (predeterminado: './SR3/dataset/test_camus'): ") or './SR3/dataset/test_camus'
-    train_percent = float(input("Ingrese el porcentaje de datos para entrenamiento (predeterminado: 0.6): ")) or 0.6
-    val_percent = float(input("Ingrese el porcentaje de datos para validación (predeterminado: 0.2): ")) or 0.2
-    test_percent = float(input("Ingrese el porcentaje de datos para prueba (predeterminado: 0.2): ")) or 0.2
+    train_percent_input = input("Ingrese el porcentaje de datos para entrenamiento (predeterminado: 0.6): ")
+    train_percent = float(train_percent_input) if train_percent_input else 0.6
+
+    val_percent_input = input("Ingrese el porcentaje de datos para validación (predeterminado: 0.2): ")
+    val_percent = float(val_percent_input) if val_percent_input else 0.2
+
+    test_percent_input = input("Ingrese el porcentaje de datos para prueba (predeterminado: 0.2): ")
+    test_percent = float(test_percent_input) if test_percent_input else 0.2
 
     # Asegurarse de que los porcentajes sumen 1
     train_percent = float(train_percent)
