@@ -1,40 +1,39 @@
 {
     "name": "deblur_camus",
-    "phase": "train", // train or val
+    "phase": "train",
     "gpu_ids": [0],
-    "path": { //set the path
+    "path": {
         "log": "logs",
         "tb_logger": "tb_logger",
         "results": "results",
         "checkpoint": "checkpoint",
         "resume_state": "experiments/deblur_camus_compression_v2.1/checkpoint/I600000_E186"
-        // "resume_state": "experiments/deblur_camus_v1.4/checkpoint/I250000_E48" //pretrain model or training state
     },
     "datasets": {
         "train": {
             "name": "CAMUS",
-            "mode": "HR", // whether need LR img
+            "mode": "HR",
             "dataroot": "dataset/train_camus_128_128",
-            "datatype": "img", //lmdb or img, path of img files
-            "l_resolution": 128, // low resolution need to super_resolution
-            "r_resolution": 128, // high resolution
+            "datatype": "img",
+            "l_resolution": 128,
+            "r_resolution": 128,
             "batch_size": 4,
             "num_workers": 8,
             "use_shuffle": true,
-            "data_len": -1 // -1 represents all data used in train
+            "data_len": -1
         },
         "val": {
             "name": "CAMUS",
             "mode": "LRHR",
             "dataroot": "dataset/test_camus_128_128",
-            "datatype": "img", //lmdb or img, path of img files
+            "datatype": "img",
             "l_resolution": 128,
             "r_resolution": 128,
-            "data_len": -1 // data length in validation
+            "data_len": -1
         }
     },
     "model": {
-        "which_model_G": "sr3", // use the ddpm or sr3 network structure
+        "which_model_G": "sr3",
         "finetune_norm": false,
         "unet": {
             "in_channel": 6,
@@ -53,7 +52,7 @@
             "res_blocks": 2,
             "dropout": 0.2
         },
-        "beta_schedule": { // use munual beta_schedule for acceleration
+        "beta_schedule": {
             "train": {
                 "schedule": "linear",
                 "n_timestep": 2000,
@@ -69,8 +68,8 @@
         },
         "diffusion": {
             "image_size": 128,
-            "channels": 3, //sample channel
-            "conditional": true // unconditional generation or unconditional generation(super_resolution)
+            "channels": 3,
+            "conditional": true
         }
     },
     "train": {
@@ -82,7 +81,7 @@
             "type": "adam",
             "lr": 1e-4
         },
-        "ema_scheduler": { // not used now
+        "ema_scheduler": {
             "step_start_ema": 5000,
             "update_ema_every": 1,
             "ema_decay": 0.9999
