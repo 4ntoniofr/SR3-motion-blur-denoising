@@ -3,7 +3,7 @@ import os
 import subprocess
 
 
-def modificar_JSON_configuracion(n_iter=600000, val_freq=5000, save_freq=1000, print_freq=10, resume_state="",
+def modificar_JSON_configuracion(n_iter=600000, val_freq=5000, save_freq=10000, print_freq=10, resume_state="",
                                  train_dataset='./SR3/dataset/train_camus',
                                  val_dataset='./SR3/dataset/validation_camus', resolution=128):
     json_file = str(os.path.join("SR3", os.path.join("config", "train_wizard_deblurring.json")))
@@ -43,13 +43,13 @@ def main():
         "Ingrese el directorio para guardar imágenes de entrenamiento (predeterminado: './SR3/dataset/train_camus'): ") or './SR3/dataset/train_camus'
     val_dataset = input(
         "Ingrese el directorio para guardar imágenes de validación (predeterminado: './SR3/dataset/validation_camus'): ") or './SR3/dataset/validation_camus'
-    resolution = input("Ingrese la resolución de las imágenes (predeterminado: 128): ") or 128
-    n_iter = input(
-        "Ingrese el número de iteraciones durante las que el modelo entrenará (predeterminado: 600000): ") or 600000
-    val_freq = input("Ingrese la frecuencia de validación en iteraciones (predeterminado: 5000): ") or 5000
-    save_freq = input(
-        "Ingrese la frecuencia de guardado de puntos de control en iteraciones (predeterminado: 1000): ") or 1000
-    print_freq = input("Ingrese la frecuencia de impresión de resultados en iteraciones (predeterminado: 10): ") or 10
+    resolution = int(input("Ingrese la resolución de las imágenes (predeterminado: 128): ")) or 128
+    n_iter = int(input(
+        "Ingrese el número de iteraciones durante las que el modelo entrenará (predeterminado: 600000): ")) or 600000
+    val_freq = int(input("Ingrese la frecuencia de validación en iteraciones (predeterminado: 5000): ")) or 5000
+    save_freq = int(input(
+        "Ingrese la frecuencia de guardado de puntos de control en iteraciones (predeterminado: 10000): ")) or 10000
+    print_freq = int(input("Ingrese la frecuencia de impresión de resultados en iteraciones (predeterminado: 10): ")) or 10
 
     modificar_JSON_configuracion(n_iter, val_freq, save_freq, print_freq, resume_state, train_dataset, val_dataset,
                                  resolution)
