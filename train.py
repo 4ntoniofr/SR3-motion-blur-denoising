@@ -2,7 +2,7 @@ import subprocess
 import os
 
 def entrenar_SR3(config_file):
-    command = "python " + os.path.join("SR3", "sr.py") + " --config " + os.path.join("config", config_file) + " -p train"
+    command = "python " + os.path.join("SR3", "sr.py") + " --config " + os.path.join("SR3","config", config_file) + " -p train"
     process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
     process.wait()
     print(process.stdout.read().decode("utf-8"))

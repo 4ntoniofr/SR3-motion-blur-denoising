@@ -77,7 +77,7 @@
     "train": {
         "n_iter": 600000,
         "val_freq": 5000,
-        "save_checkpoint_freq": 1000,
+        "save_checkpoint_freq": 10000,
         "print_freq": 10,
         "optimizer": {
             "type": "adam",

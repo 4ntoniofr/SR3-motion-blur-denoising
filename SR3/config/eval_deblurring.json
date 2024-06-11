@@ -1,13 +1,15 @@
 {
     "name": "deblur_camus",
     "phase": "train",
-    "gpu_ids": [0],
+    "gpu_ids": [
+        0
+    ],
     "path": {
         "log": "logs",
         "tb_logger": "tb_logger",
         "results": "results",
         "checkpoint": "checkpoint",
-        "resume_state": "experiments/deblur_camus_compression_v2.1/checkpoint/I600000_E186"
+        "resume_state": "./SR3/pretrained_models/pretrained_motion_blur_camus/I580000_E180"
     },
     "datasets": {
         "train": {
@@ -25,7 +27,7 @@
         "val": {
             "name": "CAMUS",
             "mode": "LRHR",
-            "dataroot": "dataset/test_camus_128_128",
+            "dataroot": "./SR3/dataset/test_camus",
             "datatype": "img",
             "l_resolution": 128,
             "r_resolution": 128,
@@ -56,14 +58,14 @@
             "train": {
                 "schedule": "linear",
                 "n_timestep": 2000,
-                "linear_start": 1e-6,
-                "linear_end": 1e-2
+                "linear_start": 1e-06,
+                "linear_end": 0.01
             },
             "val": {
                 "schedule": "linear",
                 "n_timestep": 2000,
-                "linear_start": 1e-6,
-                "linear_end": 1e-2
+                "linear_start": 1e-06,
+                "linear_end": 0.01
             }
         },
         "diffusion": {
@@ -79,7 +81,7 @@
         "print_freq": 10,
         "optimizer": {
             "type": "adam",
-            "lr": 1e-4
+            "lr": 0.0001
         },
         "ema_scheduler": {
             "step_start_ema": 5000,

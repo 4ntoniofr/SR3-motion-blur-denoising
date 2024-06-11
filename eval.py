@@ -125,7 +125,7 @@ def modificar_JSON_configuracion(config_file="eval_deblurring.json",
 
 
 def main():
-    config_file = "eval_deblurring.json"
+    config_file = "SR3/config/eval_deblurring.json"
     pretrained_model = input(
         "Ingrese la ruta del modelo preentrenado (predeterminado: ./SR3/pretrained_models/pretrained_motion_blur_camus/I580000_E180): ") or "./SR3/pretrained_models/pretrained_motion_blur_camus/I580000_E180"
     input_directory = input(

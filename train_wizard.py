@@ -6,7 +6,7 @@ import subprocess
 def modificar_JSON_configuracion(n_iter=600000, val_freq=5000, save_freq=10000, print_freq=10, resume_state="",
                                  train_dataset='./SR3/dataset/train_camus',
                                  val_dataset='./SR3/dataset/validation_camus', resolution=128):
-    json_file = str(os.path.join("SR3", os.path.join("config", "train_wizard_deblurring.json")))
+    json_file = str(os.path.join("SR3", os.path.join("config", "SR3/config/train_wizard_deblurring.json")))
 
     with open(json_file, 'r') as file:
         data = json.load(file)
@@ -30,7 +30,7 @@ def modificar_JSON_configuracion(n_iter=600000, val_freq=5000, save_freq=10000, 
 
 def entrenar_SR3():
     command = "python " + os.path.join("SR3", "sr.py") + " --config " + os.path.join("SR3", os.path.join("config",
-                                                                                                         "train_wizard_deblurring.json")) + " -p train"
+                                                                                                         "SR3/config/train_wizard_deblurring.json")) + " -p train"
     process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
     process.wait()
     print(process.stdout.read().decode("utf-8"))

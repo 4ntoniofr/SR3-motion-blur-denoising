@@ -6,24 +6,36 @@ from PIL import Image
 import numpy as np
 import zipfile
 import random
+import gdown
 
 
 def descargar_dataset_CAMUS():
     url = 'https://humanheart-project.creatis.insa-lyon.fr/database/api/v1/folder/63fde55f73e9f004868fb7ac/download'
-    response = requests.get(url, stream=True)
+    gd_link = 'https://drive.google.com/uc?id=1TIl3BX_f456zNzWAOMSIRNkcssBWAqwm'
 
-    # Verificar si la descarga fue exitosa
-    if response.status_code == 200:
-        # Crear una barra de carga en porcentaje
-        total_size = int(response.headers.get('content-length', 0))
-        block_size = 1024 * 1024  # 1 MB
-        with open('camus-dataset.zip', 'wb') as file:
-            for data in tqdm(response.iter_content(block_size), total=total_size // block_size, unit='kB',
-                             unit_scale=True):
-                file.write(data)
-        print('¡El conjunto de datos CAMUS ha sido descargado exitosamente!')
-    else:
-        print(f"Error al descargar el conjunto de datos CAMUS. Código de estado: {response.status_code}")
+    try:
+        response = requests.get(url, stream=True)
+
+        # Verificar si la descarga fue exitosa
+        if response.status_code == 200:
+            # Crear una barra de carga en porcentaje
+            total_size = int(response.headers.get('content-length', 0))
+            block_size = 1024 * 1024  # 1 MB
+            with open('camus-dataset.zip', 'wb') as file:
+                for data in tqdm(response.iter_content(block_size), total=total_size // block_size, unit='kB',
+                                 unit_scale=True):
+                    file.write(data)
+            print('¡El conjunto de datos CAMUS ha sido descargado exitosamente!')
+        else:
+            raise Exception(f"Código de estado: {response.status_code}")
+    except Exception as e:
+        print(f"Error al descargar el conjunto de datos CAMUS desde la URL principal")
+        print("Intentando descargar desde Google Drive...")
+        try:
+            gdown.download(gd_link, 'camus-dataset.zip', quiet=False)
+            print('¡El conjunto de datos CAMUS ha sido descargado exitosamente desde Google Drive!')
+        except Exception as gd_error:
+            print(f"Error al descargar el conjunto de datos CAMUS desde Google Drive: {gd_error}")
 
 
 def extraer_dataset_CAMUS(path_to_zip_file='camus-dataset.zip', directory_to_extract_to='./CAMUS_dataset/'):
@@ -113,6 +125,7 @@ def NIB_a_PNG(input_dir, train_percent=0.6, val_percent=0.2, test_percent=0.2, t
 
 def main():
     already_downloaded = input("¿Ya descargó el conjunto de datos CAMUS? (s/N): ") or 'N'
+    input_dir = "./CAMUS_dataset/"
     if already_downloaded.lower() != 's':
         print("Descargando conjunto de datos CAMUS...")
         descargar_dataset_CAMUS()

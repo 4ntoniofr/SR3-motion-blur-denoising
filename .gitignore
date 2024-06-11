@@ -2,3 +2,5 @@
 camus-dataset.zip
 /SR3/dataset
 /experiments
+*/__pycache__/*
+/SR3/pretrained_models
